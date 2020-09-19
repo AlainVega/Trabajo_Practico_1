@@ -16,11 +16,58 @@ void InicializarMatriz(char matriz[TAM_CIUDAD][TAM_CIUDAD]);
 int ValidarEntrada(int array[N_ANTENAS][4], int fila);
 void ImprimirMatriz(char matriz[TAM_CIUDAD][TAM_CIUDAD]);
 
+// TODO: Cambiar valores de variables despues (capacidad de los vectores principalmente)
+void OcuparEspacios(int antenas[N_ANTENAS][4], char ciudad[TAM_CIUDAD][TAM_CIUDAD]) {
+	int i, j, k, fila, columna, potencia, direccion, direccion_fila, direccion_columna, reduccion;
+	// NOTA: Poner la capacidad de rebasar la matriz despues, imprimiendo un mensaje si pasa.
+	for (i = 0; i < N_ANTENAS ; i++) { // Recorrer el array de antenas
+		fila = antenas[i][0];
+		columna = antenas[i][1];
+		direccion = antenas[i][2];
+		potencia = antenas[i][3];
+		switch (direccion) {
+			case 0:
+				direccion_fila = 1;
+				direccion_columna = -1;
+				break;
+			case 1:
+				direccion_fila = 1;
+				direccion_columna = 1;
+				break;
+			case 2:
+				direccion_fila = -1;
+				direccion_columna = 1;
+				break;
+			case 3:
+				direccion_fila = -1;
+				direccion_columna = -1;
+				break;
+		}
+		reduccion = 0;
+		for (j = 0; j < potencia; j++) { // Hacer por fila
+			for (k = 0; k < potencia - reduccion; k++) {
+				printf("Posicion a cambiar (antena %d): (%d, %d)\n", i, fila + j, columna + k);
+				if (abs(fila + j * direccion_fila) >= TAM_CIUDAD || abs(columna + k * direccion_columna) >= TAM_CIUDAD) {
+					continue;
+				}
+				if (ciudad[fila + j * direccion_fila][columna + k * direccion_columna] == 'C') {
+					ciudad[fila + j * direccion_fila][columna + k * direccion_columna] = '-';
+				}
+				else {
+					ciudad[fila + j * direccion_fila][columna + k * direccion_columna] = 'C';
+				}
+			}
+			reduccion++;
+		}
+	}
+}
+
 int main(void) {
 	puts("Bienvenido... \nEl mapa inicial de la ciudad es:");
+	// TODO: Cambiar todo esto para el final xd
+	int i, j;
 	char ciudad[TAM_CIUDAD][TAM_CIUDAD];
 	InicializarMatriz(ciudad);
-	int i, j;
 	for ( i = 0 ; i < N_ANTENAS ; i++ ) {
 		if ( 1 == ValidarEntrada(antenas, i)) {
 			int fila;
@@ -34,6 +81,18 @@ int main(void) {
 			}
 		}
 	}
+	for (i = 0 ; i < N_ANTENAS ; i++) {
+		int fila;
+		for (j = 0; j < 1 ;j++) {
+			int columna;
+			fila = antenas[i][j];
+			columna = antenas[i][j + 1];
+			ciudad[fila][columna] = 'x';
+			fila = 0;
+			columna = 0;
+		}
+	}
+	OcuparEspacios(antenas, ciudad);
 	ImprimirMatriz(ciudad);
 }
 
@@ -44,18 +103,17 @@ Recibe la matriz de caracteres.
 */
 void InicializarMatriz(char matriz[TAM_CIUDAD][TAM_CIUDAD]) {
 	int i, j;
-	for ( i = 0 ; i < TAM_CIUDAD ; i++ ) {
-		for ( j = 0 ; j < TAM_CIUDAD ; j++ ) {
+	for (i = 0 ; i < TAM_CIUDAD ; i++) {
+		for (j = 0 ; j < TAM_CIUDAD ; j++) {
 			matriz[i][j] = '-';
 		}
 	}
-	for ( i = 0 ; i < TAM_CIUDAD ; i++ ) {
-		for ( j = 0; j < TAM_CIUDAD ; j++ ) {
-			if (j == TAM_CIUDAD -1 ) {
+	for (i = 0; i < TAM_CIUDAD; i++) {
+		for (j = 0; j < TAM_CIUDAD; j++) {
+			if (j == TAM_CIUDAD - 1) {
 				printf("|%c|", matriz[i][j]);
 			}
-			else
-			{
+			else {
 				printf("|%c", matriz[i][j]);
 			}
 		}
