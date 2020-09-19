@@ -18,7 +18,7 @@ void InicializarMatriz(char matriz[TAM_CIUDAD][TAM_CIUDAD]);
 
 // TODO: Cambiar valores de variables despues (capacidad de los vectores principalmente)
 void OcuparEspacios(int antenas[3][4], char ciudad[TAM_CIUDAD][TAM_CIUDAD]) {
-	int i, j, k, fila, columna, potencia, direccion, direccion_fila, direccion_columna;
+	int i, j, k, fila, columna, potencia, direccion, direccion_fila, direccion_columna, reduccion;
 	// NOTA: Poner la capacidad de rebasar la matriz despues, imprimiendo un mensaje si pasa.
 	for (i = 0; i < 3; i++) { // Recorrer el array de antenas
 		fila = antenas[i][0];
@@ -43,7 +43,7 @@ void OcuparEspacios(int antenas[3][4], char ciudad[TAM_CIUDAD][TAM_CIUDAD]) {
 				direccion_columna = -1;
 				break;
 		}
-		int reduccion = 0;
+		reduccion = 0;
 		for (j = 0; j < potencia; j++) { // Hacer por fila
 			for (k = 0; k < potencia - reduccion; k++) {
 				printf("Posicion a cambiar (antena %d): (%d, %d)\n", i, fila + j, columna + k);
