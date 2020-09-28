@@ -116,6 +116,7 @@ int ValidarEntrada(int array[N_ANTENAS][4], int fila) {
 			}
 			else {
 				bandPosicion = 0;
+				printf("Se descarto la antena numero: %d, por coordenada no valida.\n", fila);
 				break;
 			}
 		}
@@ -126,6 +127,7 @@ int ValidarEntrada(int array[N_ANTENAS][4], int fila) {
 			}
 			else {
 				bandDireccion = 0;
+				printf("Se descarto la antena numero: %d, por zona de cobertura no valida.\n", fila);
 				break;
 			}
 		}
@@ -136,6 +138,7 @@ int ValidarEntrada(int array[N_ANTENAS][4], int fila) {
 			}
 			else {
 				bandPotencia = 0;
+				printf("Se descarto la antena numero: %d, por potencia no valida.\n", fila);
 				break;
 			}
 		}
@@ -157,7 +160,6 @@ Funcion ImprimirMatriz, imprime una matriz de caracteres
 No retorna nada
 Recibe la matriz de caracteres a ser imprimida
 */
-
 void ImprimirMatriz(char matriz[TAM_CIUDAD][TAM_CIUDAD]) {
 	int i, j;
 	for (i = 0; i < TAM_CIUDAD; i++) {
