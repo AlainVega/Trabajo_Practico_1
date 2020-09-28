@@ -50,7 +50,7 @@ void OcuparEspacios(int indice, char ciudad[TAM_CIUDAD][TAM_CIUDAD]) {
 	for (i = 0; i < potencia; i++) { // Recorrer por fila
 		for (j = 0; j < potencia - reduccion; j++) { // La cantidad de columnas recorridas disminuye con fila
 			// Las variables de direccion se utilizan para multiplicar por los iteradores y asi moverse hacia arriba o abajo o izquierda o derecha
-			if (abs(fila + i * direccion_fila) >= TAM_CIUDAD || abs(columna + j * direccion_columna) >= TAM_CIUDAD) {
+			if ((fila + i * direccion_fila >= TAM_CIUDAD || fila + i * direccion_fila < 0) || (columna + j * direccion_columna >= TAM_CIUDAD || columna + j * direccion_columna < 0)) {
 				bandera_excedio_matriz = 1;
 				continue;
 			}
@@ -64,7 +64,7 @@ void OcuparEspacios(int indice, char ciudad[TAM_CIUDAD][TAM_CIUDAD]) {
 		reduccion++;
 	}
 	if (bandera_excedio_matriz == 1) {
-		printf("La senhal de la antena %d excedio el rango de la ciudad.\n", indice);
+		printf("Cuidado: la senhal de la antena %d excedio el rango de la ciudad.\n", indice);
 	}
 }
 
@@ -77,7 +77,7 @@ int main(void) {
 			OcuparEspacios(i, ciudad);
 		}
 	}
-	puts("Resultado");
+	puts("Resultado:");
 	ImprimirMatriz(ciudad);
 }
 
@@ -111,7 +111,7 @@ int ValidarEntrada(int array[N_ANTENAS][4], int fila) {
 			f = array[fila][j];
 			c = array[fila][j+1];
 			if (f >= 0 && f < TAM_CIUDAD && c >= 0 && c < TAM_CIUDAD) {
-				//Las coordenadas de la antena  son validas
+				//Las coordenadas de la antena son validas
 				bandPosicion = 1;
 			}
 			else {
