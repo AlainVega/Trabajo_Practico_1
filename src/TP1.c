@@ -64,7 +64,7 @@ void OcuparEspacios(int indice, char ciudad[TAM_CIUDAD][TAM_CIUDAD]) {
 		reduccion++;
 	}
 	if (bandera_excedio_matriz == 1) {
-		printf("Cuidado: la senhal de la antena %d excedio el rango de la ciudad.\n", indice);
+		printf("Cuidado: la señal de la antena %d excedio el rango de la ciudad.\n", indice);
 	}
 }
 
