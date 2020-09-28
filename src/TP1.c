@@ -72,7 +72,7 @@ int main(void) {
 	int i;
 	char ciudad[TAM_CIUDAD][TAM_CIUDAD];
 	InicializarMatriz(ciudad);
-	for (i = 0; i < N_ANTENAS; i++) {
+	for (i = 0; i < N_ANTENAS; ++i) {
 		if (ValidarEntrada(antenas, i) == 1) {
 			OcuparEspacios(i, ciudad);
 		}
